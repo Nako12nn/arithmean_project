@@ -1,29 +1,60 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(void) { 
-//output
-    char str[] = {"Im okey with it"};
-    printf("str = %s\n", "that is it");
-    puts(str); // does \n on its own 
-    puts(str);
 
+    // char initial[100] = "what a shot by devis";
+    // char destination[12];
 
-//input
-    char my_str[10];
-    //fgets(my_str, sizeof(my_str), stdin); // buffer, how many item it reads (n-1, cause in the last cell - \0), where we read from
+    // const char *ptr_init = initial;
+    // char *ptr_dest = destination;
+    // int size_destination = sizeof(destination);
+
+    // while (*ptr_init != '\0' && size_destination-- > 1)
+    //     *ptr_dest++ = *ptr_init++;
+    // *ptr_dest = '\0';
     
-    //scanf("%9s", my_str); // %9s - max 9 elements to read from input
-    //puts(my_str);
-    // scanf - no, gets - no!
+    // puts(destination);
 
-    int max_read = sizeof(my_str), i = 0;
-    char *ptr_max = my_str, ch;
 
-    while ((ch = getchar()) != '\n' && ch != EOF && i < max_read) 
-        ptr_max[i++] = ch;
 
-    ptr_max[i] = '\0';
+    char initial[100] = "what a shot by devis";
+    char destination[12];
+    const char *ptr_int = initial;
 
-    puts(my_str);
+    // strcpy(destination, initial); // for this array we copy in must have enough size
+    // puts(destination);
+
+    // int size_dst = sizeof(destination) - 1;//the last - \0
+    // strncpy(destination, initial, size_dst);
+    // destination[size_dst] = '\0';
+    
+    // puts(destination);
+
+
+
+    // int number_char = 0;
+    // while (*ptr_int++)
+    //     number_char++;
+
+    // size_t length = strlen(initial); dont use it much as it use a loop
+
+    // printf("Amount of characters = %zu\n", length);
+
+
+
+    char str1[30] = {"Nakonechnyi"};
+    char str2[22] = {"Maksym"};
+
+    strcat(str1, str2);
+    printf("%s", str1);
+    printf("\n");
+
+    size_t max_add = sizeof(str2) - strlen(str2) - 1;
+    strncat(str2, str1, max_add);
+    str2[sizeof(str2)-1] = '\0';
+    
+    printf("%s", str2);
+
     return 0;
 }

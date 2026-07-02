@@ -1,3 +1,3 @@
-for (int i = 0; i < 7; ++i) {
-        printf("%d ", array[i]);
-    }
+strcat(str1, str2);
+    // printf("%s", str1);
+    // printf("\n");
