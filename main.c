@@ -1,80 +1,40 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main(void) { 
-// string comparison
-    // char first_str[20] = "chose an option";
-    // char second_str[18] = "chose an option";
 
-    // const char *ptr_first = first_str;
-    // const char *ptr_second = second_str;
-    // size_t size_second = sizeof(second_str);
-    // short counter = 0;
+    double width = 1.5, length = 2.4, height = 3.3;
+    char product_name[] = "Desktop";
+
+    size_t size_opt = strlen(product_name) + 35;
     
-    // for (int i = 0; i < size_second;) {
-    //     if(ptr_first[i] == ptr_second[i]){
-    //         i++;
-    //         counter++;
-    //     }
-    //     else 
-    //     {
-    //         printf("Strings are not the same\n");
-    //         return 0;
-    //     }
-
-    //     if (counter == (size_second))
-    //     printf("Strings are the same\n");
-    // }
-
-
-
-    // short i = 0;
-
-    // for (; ptr_first[i] != '\0' && ptr_second[i] != '\0'; ++i) {
-    //     if (ptr_first[i] != ptr_second[i]){
-    //         puts("The strings are not the same");
-    //         return 0;
-    //     }
-    // }
-
-    // if (ptr_first[i] != ptr_second[i]) {
-    //     puts("Strings are not the same...");
-    //     return 0;
-    // }
-    // puts("Strings are the same");
-   
-
-
-    // short max_len = sizeof(second_str);
-    // strncmp(first_str, second_str, max_len); checks if the 2 items are equal and take the length to check
-
-    // if (strncmp(first_str, second_str, max_len) == 0)
-    //     puts("Strings are equal");
-    // else
-    //     puts("Strings are not equal");
-
-
-    const char* my_strings[] = {"Nakonechnyi", "Nako", "Max", "Niko", "Narrow", "Nail", "Magnus", "Nice"};
-// my_strings[0] -> "Nakonechnyi" etc
-
-    int temp = sizeof(my_strings) / sizeof(*my_strings);
-
-    for (int i = 0; i < temp; ++i) {
-        if (strncmp(my_strings[i], "Na", 2) == 0)
-            puts(my_strings[i]);
-    }
-
-
-    char jdk_str[] = "172634!-_JkD@#$;:";
-    char *ptr_jdk = strpbrk(jdk_str, "$#*");
-
-    printf("jdk adress = %p\nptr = %p\n", jdk_str, ptr_jdk);
-
-    if (ptr_jdk != NULL)
-    {
-        printf("The sign \"%s\" was foundn\n", ptr_jdk);
-    }
+    char *option = malloc(size_opt);// take memory
+    const char buff[] = "[%s: %.2f x %.2f x %.2f]";
     
+    sprintf(option, buff, product_name, width, length, height);// where, how, what
+    puts(option);
+    puts("");
+    free(option);// gives it back
+
+
+
+    int tpr_num = -240;
+    char storage_num[11];
+
+    sprintf(storage_num, "%d", tpr_num);
+
+    puts(storage_num);// its represented as string
+    puts("");
+
+
+
+    int got_nums = atoi("12345");
+    long a = atol("-300000000");
+    long long s = atoll("40000000000000");
+    double d = atof("3.1415962535");
+
+    printf("got_nums = %d\na = %ld\ns = %lld\nd = %.10f\n", got_nums, a, s, d);
 
     return 0;
 }
