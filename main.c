@@ -2,59 +2,79 @@
 #include <string.h>
 
 int main(void) { 
+// string comparison
+    // char first_str[20] = "chose an option";
+    // char second_str[18] = "chose an option";
 
-    // char initial[100] = "what a shot by devis";
-    // char destination[12];
-
-    // const char *ptr_init = initial;
-    // char *ptr_dest = destination;
-    // int size_destination = sizeof(destination);
-
-    // while (*ptr_init != '\0' && size_destination-- > 1)
-    //     *ptr_dest++ = *ptr_init++;
-    // *ptr_dest = '\0';
+    // const char *ptr_first = first_str;
+    // const char *ptr_second = second_str;
+    // size_t size_second = sizeof(second_str);
+    // short counter = 0;
     
-    // puts(destination);
+    // for (int i = 0; i < size_second;) {
+    //     if(ptr_first[i] == ptr_second[i]){
+    //         i++;
+    //         counter++;
+    //     }
+    //     else 
+    //     {
+    //         printf("Strings are not the same\n");
+    //         return 0;
+    //     }
+
+    //     if (counter == (size_second))
+    //     printf("Strings are the same\n");
+    // }
 
 
 
-    char initial[100] = "what a shot by devis";
-    char destination[12];
-    const char *ptr_int = initial;
+    // short i = 0;
 
-    // strcpy(destination, initial); // for this array we copy in must have enough size
-    // puts(destination);
+    // for (; ptr_first[i] != '\0' && ptr_second[i] != '\0'; ++i) {
+    //     if (ptr_first[i] != ptr_second[i]){
+    //         puts("The strings are not the same");
+    //         return 0;
+    //     }
+    // }
 
-    // int size_dst = sizeof(destination) - 1;//the last - \0
-    // strncpy(destination, initial, size_dst);
-    // destination[size_dst] = '\0';
+    // if (ptr_first[i] != ptr_second[i]) {
+    //     puts("Strings are not the same...");
+    //     return 0;
+    // }
+    // puts("Strings are the same");
+   
+
+
+    // short max_len = sizeof(second_str);
+    // strncmp(first_str, second_str, max_len); checks if the 2 items are equal and take the length to check
+
+    // if (strncmp(first_str, second_str, max_len) == 0)
+    //     puts("Strings are equal");
+    // else
+    //     puts("Strings are not equal");
+
+
+    const char* my_strings[] = {"Nakonechnyi", "Nako", "Max", "Niko", "Narrow", "Nail", "Magnus", "Nice"};
+// my_strings[0] -> "Nakonechnyi" etc
+
+    int temp = sizeof(my_strings) / sizeof(*my_strings);
+
+    for (int i = 0; i < temp; ++i) {
+        if (strncmp(my_strings[i], "Na", 2) == 0)
+            puts(my_strings[i]);
+    }
+
+
+    char jdk_str[] = "172634!-_JkD@#$;:";
+    char *ptr_jdk = strpbrk(jdk_str, "$#*");
+
+    printf("jdk adress = %p\nptr = %p\n", jdk_str, ptr_jdk);
+
+    if (ptr_jdk != NULL)
+    {
+        printf("The sign \"%s\" was foundn\n", ptr_jdk);
+    }
     
-    // puts(destination);
-
-
-
-    // int number_char = 0;
-    // while (*ptr_int++)
-    //     number_char++;
-
-    // size_t length = strlen(initial); dont use it much as it use a loop
-
-    // printf("Amount of characters = %zu\n", length);
-
-
-
-    char str1[30] = {"Nakonechnyi"};
-    char str2[22] = {"Maksym"};
-
-    strcat(str1, str2);
-    printf("%s", str1);
-    printf("\n");
-
-    size_t max_add = sizeof(str2) - strlen(str2) - 1;
-    strncat(str2, str1, max_add);
-    str2[sizeof(str2)-1] = '\0';
-    
-    printf("%s", str2);
 
     return 0;
 }
