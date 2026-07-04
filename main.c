@@ -1,40 +1,27 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <math.h>
+
+double find_smallest_number(double n1, double n2)
+{
+    return (n1 < n2) ? n1 : n2;
+}
+
+double min_3(double n1, double n2, double n3)
+{
+    //return (n1 < n2) ? ((n1 < n3) ? n1 : n3) : ((n2 < n3) ? n2 : n3);
+    double min_2 = find_smallest_number(n1, n2);
+    return (min_2 < n3) ? min_2 : n3;
+}
+
 
 int main(void) { 
 
-    double width = 1.5, length = 2.4, height = 3.3;
-    char product_name[] = "Desktop";
-
-    size_t size_opt = strlen(product_name) + 35;
-    
-    char *option = malloc(size_opt);// take memory
-    const char buff[] = "[%s: %.2f x %.2f x %.2f]";
-    
-    sprintf(option, buff, product_name, width, length, height);// where, how, what
-    puts(option);
-    puts("");
-    free(option);// gives it back
+    printf("%.3f\n", find_smallest_number(-4.2, -2.2));
+    printf("%.3f\n", min_3(3, 4, 5));
+    double x = 1;
+    printf("%.2f\n", find_smallest_number(++x, x));
 
 
-
-    int tpr_num = -240;
-    char storage_num[11];
-
-    sprintf(storage_num, "%d", tpr_num);
-
-    puts(storage_num);// its represented as string
-    puts("");
-
-
-
-    int got_nums = atoi("12345");
-    long a = atol("-300000000");
-    long long s = atoll("40000000000000");
-    double d = atof("3.1415962535");
-
-    printf("got_nums = %d\na = %ld\ns = %lld\nd = %.10f\n", got_nums, a, s, d);
 
     return 0;
 }
