@@ -1,0 +1,9 @@
+.vscode/
+main.dSYM/
+.DS_store
+func
+func.cpp
+main
+my_program
+program
+tests

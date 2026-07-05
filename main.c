@@ -1,65 +1,36 @@
 #include <stdio.h>
 
-void replace(int *a, int *b)
+float rectangle_area(float length, float width) // name of func is ptr to this func
 {
-    int t = *a;
-    *a = *b;
-    *b = t;
+    return length * width;
 }
 
-int sum_arr(const short array[], int length)// length parameter is strictly required const short *array == const short array[]
+
+float rectangle_perymetr(float length, float width)
 {
-    int result = 0;
-    for (int i = 0; i < length; ++i)
-        result += array[i];
-    
-    return result;
+    return 2 * (length + width);
 }
 
-const char* find_space(const char* buff)
+void put_greet(void)
 {
-    while(*buff != '\0') {
-        if (*buff == ' ') 
-            return buff;
-        buff++;
-    }
-    return buff;
+    printf("Get after.");
+    puts("");
 }
 
-void show_arr2D(const short (*arr)[3], int rows)
-{
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            printf("%d ", arr[i][j]);
-        }
-        putchar('\n');
-    }
-}
 
-int main(void) { 
+int main (void) {
 
-    int a = 7, b = 12;
-    replace(&a, &b);
-    printf("%d %d\n", a, b);
+    float (*rect_ptr) (float, float);
+    rect_ptr = rectangle_perymetr;
 
+    void (*ptr_put) (void);
+    ptr_put = put_greet;
 
-    short my_arr[] = {1020, 1200, 1500, 1000, 1340, 930, 990, 1100, 1700, 1500, 1300, 1750};
-    int arr_length = (sizeof(my_arr) / sizeof(*my_arr));
+    ptr_put();
 
-    int sum = sum_arr(my_arr, arr_length);
-    printf("Year's bill for electrycity = %d\n", sum);
+    float result = rect_ptr(2.5, 2.0);
 
-
-    char mystr[] = "Thatisgonna_be-nice day";
-    const char* res = find_space(mystr);
-
-    printf("adress \' \' sign = %p\n\n", res);
-
-
-    short new_arr[][3] = {{7, 8, 5}, {3, 4, 1}};
-
-    show_arr2D(new_arr, sizeof(new_arr) / sizeof(*new_arr));
-
+    printf("rect_ptr = %.2f\n", result);
 
     return 0;
 }
