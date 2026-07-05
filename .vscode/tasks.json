@@ -8,7 +8,7 @@
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
                 "-g",
-                "${file}",
+                "${file}/*func.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
