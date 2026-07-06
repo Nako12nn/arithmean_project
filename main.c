@@ -1,36 +1,51 @@
 #include <stdio.h>
+#define SIZE    7
 
-float rectangle_area(float length, float width) // name of func is ptr to this func
+void filter (int new_ar[], size_t size_new,
+            const int source_arr[], size_t size_source,
+            int (*is_correct) (int))
 {
-    return length * width;
+    for (int i = 0; i < size_new; ++i)
+        new_ar[i] = 0;
+    
+
+    for (int i = 0, j = 0; i < size_new; ++i) {
+        if (is_correct(source_arr[i]))
+            new_ar[j++] = source_arr[i];
+    }
 }
 
-
-float rectangle_perymetr(float length, float width)
+int is_even(int a) 
 {
-    return 2 * (length + width);
+    return a % 2 == 0;
 }
 
-void put_greet(void)
+int is_odd(int a)
 {
-    printf("Get after.");
-    puts("");
+    return a % 2 != 0;
+}
+
+int is_positive(int a)
+{
+    return a > 0;
+}
+
+int is_negative(int a)
+{
+    return a < 0;
 }
 
 
 int main (void) {
 
-    float (*rect_ptr) (float, float);
-    rect_ptr = rectangle_perymetr;
+    int numbers[] = {2, 5, 3, 6, 5, 9, -2, 0, 5, 4};
+    int reslt[SIZE];
+    int (*criterials[]) (int) = {is_even, is_odd, is_positive, is_negative}; // array of ptrs to functions
 
-    void (*ptr_put) (void);
-    ptr_put = put_greet;
+    filter(reslt, SIZE, numbers, sizeof(numbers) / sizeof(*numbers), criterials[1]);
 
-    ptr_put();
-
-    float result = rect_ptr(2.5, 2.0);
-
-    printf("rect_ptr = %.2f\n", result);
+    for (int i = 0; i < SIZE; ++i) 
+        printf("%d ", reslt[i]);
 
     return 0;
 }
