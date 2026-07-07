@@ -1,50 +1,43 @@
 #include <stdio.h>
-#define N   8
+#include <stdlib.h>
+#include <string.h>
 
-void show_game_field(const char (*arr_ptr)[N])
+void *append(short *data, size_t *length, size_t *capacity, short value) 
 {
-    for(int i = 0; i < N; ++i) {
-        for(int j = 0; j < N; ++j) {
-            printf("%c ", (arr_ptr[i][j] == 0) ? '#' : '0');
-        }
-        puts("");
+    if(*length >= *capacity) {
+        (*capacity) *= 2;
+        
+        short *ar = realloc(data, sizeof(short) * *capacity);
+        if(ar == NULL) return data;
+
+        data = ar;
     }
-}
 
-void open_zeroes(const char (*private_ptr)[N], char (*public_ptr)[N], int i, int j)
-{
-    if (private_ptr[i][j] != 0 || public_ptr[i][j] == 1)
-        return;
-    
-    public_ptr[i][j] = 1;
+    data[*length] = value;
+    (*length)++;
 
-    if ((i-1) >= 0 && private_ptr[i-1][j] == 0) open_zeroes(private_ptr, public_ptr, i-1, j);
-    if ((i+1) < N && private_ptr[i+1][j] == 0) open_zeroes(private_ptr, public_ptr, i+1, j);
-    if ((j-1) >= 0 && private_ptr[i][j-1] == 0) open_zeroes(private_ptr, public_ptr, i, j-1);
-    if ((j+1) < N && private_ptr[i][j+1] == 0) open_zeroes(private_ptr, public_ptr, i-1, j+1);
+    return data;
 }
 
 int main(void) {
 
-    char private_feild[N][N] = {
-                {1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 0, 0, 1, 1, 0, 0, 1},
-                {1, 0, 0, 1, 1, 0, 0, 1},
-                {1, 1, 0, 0, 0, 0, 1, 1},
-                {1, 1, 0, 1, 1, 0, 1, 1},
-                {1, 1, 0, 1, 1, 0, 1, 1},
-                {1, 1, 0, 0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1, 0, 0, 0},
-    };
+    size_t capacity = 10;
+    size_t length = 0;
 
-    char public_field[N][N] = {0};
-    show_game_field(public_field);
+    short *data = malloc(sizeof(short) * capacity);
 
-    puts("-----------------------");
+    for(int i = 0; i < 9; ++i) {
+        data = append(data, &length, &capacity, rand() % 40 - 20);
+    }
 
-    open_zeroes(private_feild, public_field, 7, 7);
+    printf("length = %zu\ncapacity = %zu\n", length, capacity);
 
-    show_game_field(public_field);
+    for (int i = 0; i < length; i++)
+        printf("%d ", data[i]);
+
+    
+    free(data);
+
 
     return 0;
 }
