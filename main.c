@@ -2,42 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-void *append(short *data, size_t *length, size_t *capacity, short value) 
-{
-    if(*length >= *capacity) {
-        (*capacity) *= 2;
-        
-        short *ar = realloc(data, sizeof(short) * *capacity);
-        if(ar == NULL) return data;
 
-        data = ar;
-    }
-
-    data[*length] = value;
-    (*length)++;
-
-    return data;
-}
 
 int main(void) {
 
-    size_t capacity = 10;
-    size_t length = 0;
+    char *my_arr = malloc(10); // points to this data
+    int *ptr_int_mem = malloc(sizeof(int)); // gives us 4 bytes of mamory
+    short *ptr_shtr_mem = malloc(7 * sizeof(short));
 
-    short *data = malloc(sizeof(short) * capacity);
-
-    for(int i = 0; i < 9; ++i) {
-        data = append(data, &length, &capacity, rand() % 40 - 20);
-    }
-
-    printf("length = %zu\ncapacity = %zu\n", length, capacity);
-
-    for (int i = 0; i < length; i++)
-        printf("%d ", data[i]);
-
-    
-    free(data);
-
+    free(my_arr);
+    free(ptr_int_mem);
+    free(ptr_shtr_mem);
 
     return 0;
 }
