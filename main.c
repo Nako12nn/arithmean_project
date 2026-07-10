@@ -2,26 +2,37 @@
 #include <errno.h>
 #include <string.h>
 
+enum {name_size=10, max_points=40};
+
+typedef struct
+{
+    char name[name_size];
+    double x, y;
+} POINT;
+
+
 int main(void) {
     
-    char my_buff[65];
+    POINT vectors[max_points];
+    int length = 0;
 
-    FILE* flop = fopen("created_file.txt", "r");
-    if(flop == NULL) {
-        printf("error: %d\n", errno);
+    FILE* created_file = fopen("created_file.txt", "rb");
+    
+    if(created_file == NULL) {
         perror("created_file.txt");
         return 1;
     }
 
-    while(fgets(my_buff, sizeof(my_buff), flop)) {
-        char *ptr = strchr(my_buff, '\n');
+    while(fread(&vectors[length], sizeof(POINT), 1, created_file) == 1)
+        length++;
+    
+    fclose(created_file);
 
-        if(ptr)
-            *ptr = '\0';
-            
-        puts(my_buff);
+    
+    for (int i = 0; i < length; i++)
+    {
+        printf("%s (%.2f %.2f)\n", vectors[i].name, vectors[i].x, vectors[i].y);
     }
-
-    fclose(flop);
+    
     return 0;
 }
