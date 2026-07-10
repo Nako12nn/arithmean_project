@@ -1,48 +1,27 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-struct Cords
-{
-    double x;
-    double y;
-};
-
-struct Cords* return_sth(double x, double y)
-{
-    struct Cords* var = malloc(sizeof(struct Cords));
-    var->x = x;
-    var->y = y;
-
-    return var;
-};
+#include <errno.h>
+#include <string.h>
 
 int main(void) {
+    
+    char my_buff[65];
 
-    // struct Cords vector = {4.0, 2.0};
-    // struct Cords *ptr_vec = &vector;
+    FILE* flop = fopen("created_file.txt", "r");
+    if(flop == NULL) {
+        printf("error: %d\n", errno);
+        perror("created_file.txt");
+        return 1;
+    }
 
-    // (*ptr_vec).x = 1.0; // == ptr_vec->x = 7.5 
-    // printf("%.1f\n", (*ptr_vec).x);
+    while(fgets(my_buff, sizeof(my_buff), flop)) {
+        char *ptr = strchr(my_buff, '\n');
 
-    // double show_y = (*ptr_vec).y;
-    // printf("%.1f\n", show_y);
+        if(ptr)
+            *ptr = '\0';
+            
+        puts(my_buff);
+    }
 
-    // ptr_vec->x = 6.5;
-    // printf("%.1f\n", ptr_vec->x);
-
-    // struct Cords *ptr_cords = malloc(sizeof(struct Cords));
-
-    // ptr_cords->x = 4.7;
-    // ptr_cords->y = 3.8;
-
-    // printf("x = %.1f\ny = %.1f\n", ptr_cords->x, ptr_cords->y);
-
-    // free(ptr_cords); // FREE!
-
-
-    struct Cords* tempo = return_sth(2.2, 3.3);
-    printf("%.1f\n%.1f\n", tempo->x, tempo->y);
-
-    free(tempo);
+    fclose(flop);
     return 0;
 }
