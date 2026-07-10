@@ -1,38 +1,48 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-enum {name_length=50, birth_length=20};
-
-struct pers_info {
-    char name[name_length];
-    char last_name[name_length];
+struct Cords
+{
+    double x;
+    double y;
 };
 
-struct included_info {
-    struct pers_info nm_lm; // embedded structures 
-    char sex;
-    unsigned short age;
-    char birth_data[birth_length];
+struct Cords* return_sth(double x, double y)
+{
+    struct Cords* var = malloc(sizeof(struct Cords));
+    var->x = x;
+    var->y = y;
 
+    return var;
 };
-
-
 
 int main(void) {
 
-    struct included_info exmpl_man = {
-        {"Maksym", "Nakonechnyi"},
-        'M',
-        29,
-        "20000"
-    };
+    // struct Cords vector = {4.0, 2.0};
+    // struct Cords *ptr_vec = &vector;
 
-    printf("Name = %s\nlastname = %s\n", exmpl_man.nm_lm.name, exmpl_man.nm_lm.last_name);
+    // (*ptr_vec).x = 1.0; // == ptr_vec->x = 7.5 
+    // printf("%.1f\n", (*ptr_vec).x);
 
-    exmpl_man.age = 16;
-    strcpy(exmpl_man.birth_data, "31.05.2007");
+    // double show_y = (*ptr_vec).y;
+    // printf("%.1f\n", show_y);
 
-    printf("new age = %d\nnew birth data = %s\n", exmpl_man.age, exmpl_man.birth_data);
+    // ptr_vec->x = 6.5;
+    // printf("%.1f\n", ptr_vec->x);
 
+    // struct Cords *ptr_cords = malloc(sizeof(struct Cords));
+
+    // ptr_cords->x = 4.7;
+    // ptr_cords->y = 3.8;
+
+    // printf("x = %.1f\ny = %.1f\n", ptr_cords->x, ptr_cords->y);
+
+    // free(ptr_cords); // FREE!
+
+
+    struct Cords* tempo = return_sth(2.2, 3.3);
+    printf("%.1f\n%.1f\n", tempo->x, tempo->y);
+
+    free(tempo);
     return 0;
 }
