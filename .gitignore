@@ -1,3 +1,13 @@
 .vscode/
 .DS_store
 main
+<<<<<<< HEAD
+=======
+my_program
+program
+tests
+some1
+some1.cpp
+tempCodeRunnerFile.cpp
+tempCodeRunnerFile.c
+>>>>>>> 422a0d76d690db209a221e661fda6851abe7c75b
