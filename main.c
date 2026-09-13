@@ -1,38 +1,18 @@
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 
-enum {name_size=10, max_points=40};
-
-typedef struct
-{
-    char name[name_size];
-    double x, y;
-} POINT;
-
-
-int main(void) {
+int main() {
     
-    POINT vectors[max_points];
-    int length = 0;
+    signed short number = 4903;
+    signed short divider = 2;
 
-    FILE* created_file = fopen("created_file.txt", "rb");
-    
-    if(created_file == NULL) {
-        perror("created_file.txt");
-        return 1;
+    while(1==1){
+        if (divider > number || divider <= 1) break;
+        if((number % divider) == 0){
+            signed short mult_one = number / divider;
+            printf("%hd = %hd * %hd\n", number, divider, mult_one);
+        }
+        ++divider;
     }
 
-    while(fread(&vectors[length], sizeof(POINT), 1, created_file) == 1)
-        length++;
-    
-    fclose(created_file);
-
-    
-    for (int i = 0; i < length; i++)
-    {
-        printf("%s (%.2f %.2f)\n", vectors[i].name, vectors[i].x, vectors[i].y);
-    }
-    
     return 0;
 }
