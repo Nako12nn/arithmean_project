@@ -1,16 +1,20 @@
 #include <stdio.h>
 #include <math.h>
-#define MAX_SIZE  10
+#define MAX_SIZE  5
 
-int get_array(double array[], int size, double input_element, int counter) {
-    while((counter < size && scanf("%lf", &input_element) != EOF)) {        
-        
+int get_array(double array[], int size) {
+    double input_element = 0.0;
+    int counter = 0;
+
+    while(counter < size && scanf("%lf", &input_element) == 1) {
         array[counter++] = input_element;
     }
+
     return counter;
 }
 
 void print_array(double array[], int counter) {
+    
     for(int i = 0; i < counter; i++) {
         printf("%.2lf ", array[i]);
     }
@@ -49,17 +53,19 @@ int main() {
     double set_of_elements[MAX_SIZE] = {0.0};
     int size_of_array = sizeof(set_of_elements) / sizeof(set_of_elements[0]);
     
-    double input_element = 0.0;
+    //double input_element = 0.0;
     int counter = 0.0;
 
     // gets a Number of input elements 
-    counter = get_array(set_of_elements, size_of_array, input_element, counter);
+    counter = get_array(set_of_elements, size_of_array);
+    // printf("%d\n", counter);
 
-    puts("Your set =========>");
+    printf("\n");
+    printf("Your set =========>\n");
     print_array(set_of_elements, counter);
 
     double arithmetic_mean = get_arithmetic_mean(set_of_elements, counter);
-    printf("The arithmetic_mean ===> %.2lf\n", arithmetic_mean);
+    printf("The arithmetic mean ===> %.2lf\n", arithmetic_mean);
     printf("\n");
 
     double standard_deviation = get_standard_deviation(set_of_elements, arithmetic_mean, counter);
