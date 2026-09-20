@@ -17,9 +17,8 @@ int get_array(double array[], int size) {
     double input_element = 0.0;
     int counter = 0;
 
-    while(counter < size && scanf("%lf", &input_element) == 1) {
+    while(counter < size && scanf("%lf", &input_element) == 1)
         array[counter++] = input_element;
-    }
 
     return counter; // this function returns the number of read elements 
 }
